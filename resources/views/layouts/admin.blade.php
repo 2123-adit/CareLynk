@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Admin Dashboard') - Donation App</title>
+    <title>@yield('title', 'Admin Dashboard') - CareLynk App</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -86,7 +86,7 @@
                 <div class="position-sticky pt-3">
                     <div class="text-center mb-4">
                         <h4 class="text-white">
-                            <i class="bi bi-heart-fill"></i> Donation App
+                            <i class="bi bi-heart-fill"></i> CareLynk App
                         </h4>
                         <small class="text-white-50">Admin Panel</small>
                     </div>
