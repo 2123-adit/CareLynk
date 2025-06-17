@@ -1,5 +1,7 @@
 <?php
+// routes/web.php - Updated
 
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CampaignController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DonationController;
@@ -11,8 +13,15 @@ Route::get('/', function () {
     return redirect('/admin');
 });
 
-// Admin routes (tanpa autentikasi)
+// ✅ ADMIN AUTH ROUTES (tanpa middleware)
 Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+// ✅ ADMIN PROTECTED ROUTES (dengan middleware)
+Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     
     // Campaigns

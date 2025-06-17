@@ -1,3 +1,4 @@
+<!-- resources/views/layouts/admin.blade.php - Updated dengan logout button -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,6 +77,11 @@
             background: white !important;
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body class="bg-light">
@@ -123,6 +129,16 @@
                             </a>
                         </li>
                     </ul>
+                    
+                    <!-- ✅ LOGOUT BUTTON DI SIDEBAR -->
+                    <div class="mt-auto pt-4">
+                        <form method="POST" action="{{ route('admin.logout') }}">
+                            @csrf
+                            <button type="submit" class="nav-link text-white border-0 bg-transparent w-100 text-start">
+                                <i class="bi bi-box-arrow-right"></i> Logout
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </nav>
 
@@ -136,9 +152,24 @@
                         </button>
                         
                         <div class="d-flex align-items-center ms-auto">
-                            <span class="text-muted">
-                                <i class="bi bi-person-circle"></i> Admin
-                            </span>
+                            <!-- ✅ DROPDOWN ADMIN INFO -->
+                            <div class="dropdown">
+                                <a class="dropdown-toggle text-decoration-none text-muted" href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="bi bi-person-circle"></i> {{ Auth::guard('admin')->user()->name }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><span class="dropdown-item-text">{{ Auth::guard('admin')->user()->email }}</span></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form method="POST" action="{{ route('admin.logout') }}">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="bi bi-box-arrow-right"></i> Logout
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </nav>
